@@ -1,5 +1,5 @@
 
-SELECT  short_name,circuit_type,team_lap_recorder FROM (SELECT    Tracks.circuit_type, Teams.short_name, count(lap_recorder)  as team_lap_recorder FROM Teams,Tracks WHERE ( Teams.driver_one= Tracks.lap_recorder OR  Teams.driver_two=Tracks.lap_recorder )  GROUP by Teams.short_name ,   Tracks.circuit_type   ) 
+SELECT  circuit_type, short_name, team_lap_recorder FROM (SELECT    Tracks.circuit_type, Teams.short_name, count(lap_recorder)  as team_lap_recorder FROM Teams,Tracks WHERE ( Teams.driver_one= Tracks.lap_recorder OR  Teams.driver_two=Tracks.lap_recorder )  GROUP by Teams.short_name ,   Tracks.circuit_type   ) 
 INNER JOIN
 (SELECT  circuit_type as circuit_type_cascade,max(team_lap_recorder) as max_value FROM (SELECT    Tracks.circuit_type, Teams.short_name, count(lap_recorder)  as team_lap_recorder FROM Teams,Tracks WHERE ( Teams.driver_one= Tracks.lap_recorder OR  Teams.driver_two=Tracks.lap_recorder )  GROUP by Teams.short_name ,   Tracks.circuit_type   ) 
  GROUP by circuit_type)
