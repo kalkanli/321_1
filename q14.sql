@@ -1,1 +1,3 @@
 SELECT short_name, team_hrf_count, total_driver_hrf_count from (SELECT *,sum(driver_hrf_count) as total_driver_hrf_count FROM Teams LEFT JOIN  Drivers ON team_id=Drivers.team GROUP by team) WHERE team_hrf_count< total_driver_hrf_count ORDER By short_name DESC
+
+-- firstly we left join Teams with Drivers on team of drivers = team_id and by grouping by team. in that point we add sum aggregate func to sum Teams' drivers' hrf count. After that we have a table with team_hrf_counts and total_drivers_hrf_count. Finally we ensure condition that team_hrf_count< total_driver_hrf_count and order by short_name s of teams
